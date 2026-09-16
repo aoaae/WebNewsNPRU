@@ -325,26 +325,21 @@
                 source_link: document.getElementById('input-source').value.trim()
             };
 
-            // เปลี่ยนสถานะปุ่มเป็น Loading
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>กำลังบันทึกข้อมูล...</span>`;
 
             try {
-                // ส่งข้อมูล POST ไปยัง Google Apps Script
                 await fetch(API_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'text/plain;charset=utf-8', // ป้องกัน CORS Preflight
+                        'Content-Type': 'text/plain;charset=utf-8',
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    redirect: 'follow' // เพิ่มบรรทัดนี้เพื่อรองรับการ Redirect ของ Google
                 });
 
                 alert("บันทึกข่าวเรียบร้อยแล้ว!");
-                
-                // ล้างค่าในฟอร์ม
                 document.getElementById('news-form').reset();
-
-                // สลับกลับไปหน้า Dashboard และรีโหลดข้อมูล
                 switchView('dashboard');
                 fetchNews();
 

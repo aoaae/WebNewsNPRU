@@ -207,6 +207,9 @@
         // const API_URL = "วาง_WEB_APP_URL_ตรงนี้";
         const API_URL = "https://script.google.com/macros/s/AKfycbzcUygHgvyLyXXIMY8WLgGEgfhwFDzHPvBZe5hbZznSAXjN1fOZzRW1D7axxxgZjRIl/exec";
 
+        // กำหนดรหัสผ่านสำหรับเข้าหน้า Admin
+        const ADMIN_PASSWORD = "senpru1234";
+
         // Global State
         let allNewsData = [];
 
@@ -215,12 +218,27 @@
             fetchNews();
         });
 
+
         // Switch Tab Views (Dashboard <-> Admin)
         function switchView(view) {
             const dashboardSec = document.getElementById('view-dashboard');
             const adminSec = document.getElementById('view-admin');
             const btnDashboard = document.getElementById('nav-dashboard');
             const btnAdmin = document.getElementById('nav-admin');
+
+            // หากต้องการเข้าหน้า Admin ให้ป๊อปอัปถามรหัสผ่านก่อน
+            if (view === 'admin') {
+                const passwordInput = prompt("กรุณากรอกรหัสผ่าน Admin เพื่อเข้าสู่หน้าจัดการ:");
+                
+                // หากผู้ใช้กด Cancel
+                if (passwordInput === null) return;
+
+                // หากรหัสผ่านไม่ถูกต้อง
+                if (passwordInput !== ADMIN_PASSWORD) {
+                    alert("รหัสผ่านไม่ถูกต้อง!");
+                    return;
+                }
+            }
 
             if (view === 'dashboard') {
                 dashboardSec.classList.remove('hidden');

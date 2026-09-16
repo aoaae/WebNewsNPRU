@@ -153,18 +153,18 @@
     <div id="news-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-opacity">
         <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl transform transition-all">
             
-            <!-- Modal Header (ย้ายลิงก์มาไว้ใต้คำว่า ข่าวสาร) -->
+            <!-- Modal Header -->
             <div class="p-4 border-b border-slate-100 flex justify-between items-start bg-slate-50/50">
                 <div class="flex flex-col gap-1.5 max-w-[85%]">
                     <span class="text-xs font-semibold px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full w-fit">ข่าวสาร</span>
                     
-                    <!-- ส่วนลิงก์ต้นฉบับใต้ป้ายข่าวสาร -->
+                    <!-- เปลี่ยน div เป็น a และเปลี่ยน ID ไม่ให้ซ้ำ -->
                     <div class="flex flex-col sm:flex-row sm:items-center gap-1 text-xs">
-                        <div id="modal-source" href="#" target="_blank" rel="noopener noreferrer" 
+                        <a id="modal-source-header" href="#" target="_blank" rel="noopener noreferrer" 
                             class="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-800 font-medium hover:underline w-fit">
                             <i class="fa-solid fa-link"></i>
                             <span>ลิงก์ข่าวต้นฉบับ:</span>
-                        </div>
+                        </a>
                         <a id="modal-source-url" href="#" target="_blank" rel="noopener noreferrer" 
                             class="text-slate-500 hover:text-blue-600 underline break-all truncate max-w-full">
                         </a>
@@ -189,9 +189,9 @@
                 <p id="modal-detail" class="text-slate-600 text-sm leading-relaxed whitespace-pre-line"></p>
             </div>
 
-            <!-- Modal Footer -->
+            <!-- Modal Footer (เปลี่ยน ID ปุ่มเป็น modal-source-btn) -->
             <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
-                <a id="modal-source" href="#" target="_blank" rel="noopener noreferrer" 
+                <a id="modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" 
                     class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition shadow-sm">
                     <span>อ่านข่าวต้นฉบับ</span>
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
@@ -416,13 +416,18 @@
             document.getElementById('modal-author').textContent = item.author || 'Suksawat Saelim';
             document.getElementById('modal-time').textContent = item.timestamp || 'ไม่ระบุเวลา';
 
-            // อัปเดตลิงก์และ URL ต้นฉบับในส่วน Header
             const sourceLink = item.source_link || '#';
-            document.getElementById('modal-source').href = sourceLink;
-            
+
+            // 1. อัปเดตลิงก์หัวข้อใน Header
+            document.getElementById('modal-source-header').href = sourceLink;
+
+            // 2. อัปเดตข้อความ URL ใน Header
             const sourceUrlElem = document.getElementById('modal-source-url');
             sourceUrlElem.href = sourceLink;
             sourceUrlElem.textContent = sourceLink !== '#' ? sourceLink : 'ไม่มีลิงก์ต้นฉบับ';
+
+            // 3. อัปเดตปุ่ม "อ่านข่าวต้นฉบับ" ใน Footer
+            document.getElementById('modal-source-btn').href = sourceLink;
 
             document.getElementById('news-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';

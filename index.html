@@ -278,27 +278,40 @@
                 const imageUrl = item.image_url || 'https://via.placeholder.com/600x400?text=No+Image';
 
                 card.innerHTML = `
+                    <!-- บล็อกรูปภาพ (นำวันเวลาออกแล้ว) -->
                     <div class="relative overflow-hidden h-48 bg-slate-100">
                         <img src="${imageUrl}" alt="${item.title}" 
                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                             onerror="this.src='https://via.placeholder.com/600x400?text=Image+Error'">
-                        <div class="absolute bottom-2 left-2 bg-slate-900/60 backdrop-blur-md text-white text-[10px] px-2.5 py-1 rounded-full">
-                            <i class="fa-solid fa-clock mr-1"></i>${item.timestamp || 'ไม่ระบุเวลา'}
-                        </div>
                     </div>
+
+                    <!-- บล็อกเนื้อหาข่าว -->
                     <div class="p-5 flex-grow flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center gap-1.5 text-xs text-blue-600 font-medium mb-1">
-                                <i class="fa-solid fa-circle-user"></i>
-                                <span>${item.author || 'Suksawat Saelim'}</span>
+                            <!-- แถบแสดงชื่อผู้โพสต์ และ วันเวลาที่โพสต์ -->
+                            <div class="flex items-center justify-between text-xs mb-2.5">
+                                <div class="flex items-center gap-1.5 text-blue-600 font-medium">
+                                    <i class="fa-solid fa-circle-user"></i>
+                                    <span>${item.author || 'Suksawat Saelim'}</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-slate-400">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <span>${item.timestamp || 'ไม่ระบุเวลา'}</span>
+                                </div>
                             </div>
+
+                            <!-- หัวข้อข่าว -->
                             <h3 class="font-bold text-slate-800 text-base mb-2 group-hover:text-blue-600 transition line-clamp-2">
                                 ${item.title}
                             </h3>
+
+                            <!-- รายละเอียดข่าวแบบย่อ -->
                             <p class="text-slate-500 text-xs line-clamp-3 leading-relaxed mb-4">
                                 ${item.detail}
                             </p>
                         </div>
+
+                        <!-- ส่วนท้ายของการ์ด -->
                         <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
                             <span class="text-xs text-blue-600 font-medium group-hover:underline">อ่านรายละเอียดเพิ่มเติม</span>
                             <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition"></i>

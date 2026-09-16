@@ -160,11 +160,11 @@
                     
                     <!-- ส่วนลิงก์ต้นฉบับใต้ป้ายข่าวสาร -->
                     <div class="flex flex-col sm:flex-row sm:items-center gap-1 text-xs">
-                        <a id="modal-source" href="#" target="_blank" rel="noopener noreferrer" 
+                        <div id="modal-source" href="#" target="_blank" rel="noopener noreferrer" 
                             class="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-800 font-medium hover:underline w-fit">
                             <i class="fa-solid fa-link"></i>
-                            <span>อ่านข่าวต้นฉบับ:</span>
-                        </a>
+                            <span>ลิงก์ข่าวต้นฉบับ:</span>
+                        </div>
                         <a id="modal-source-url" href="#" target="_blank" rel="noopener noreferrer" 
                             class="text-slate-500 hover:text-blue-600 underline break-all truncate max-w-full">
                         </a>
@@ -190,8 +190,13 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-end items-center">
-                <button onclick="closeModal()" class="px-5 py-2 text-sm font-medium bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-xl transition">
+            <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
+                <a id="modal-source" href="#" target="_blank" rel="noopener noreferrer" 
+                    class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition shadow-sm">
+                    <span>อ่านข่าวต้นฉบับ</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+                <button onclick="closeModal()" class="px-4 py-2 text-sm text-slate-600 hover:bg-slate-200/60 rounded-xl transition">
                     ปิดหน้าต่าง
                 </button>
             </div>
